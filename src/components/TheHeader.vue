@@ -9,12 +9,7 @@
         </div>
         </div>
         <div class="hidden sm:flex items-center justify-end p-2.5 pl-8 md:pl-12 md:px-8 flex-1 lg:px-0 lg:w-1/2 max-w-screen-md">
-        <div class="flex w-full h-full">
-            <input type="text" placeholder="Search" class="w-full px-3 shadow-inner rounded-bl-sm rounded-tl-sm border border-gray-300 focus:border-blue-700 focus:outline-none">
-            <button class="focus:outline-none flex items-center px-6 py-1 text-gray-600 bg-gray-100 border border-l-0 border-gray-300 rounded-tr-sm rounded-br-sm hover:bg-gray-200">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-            </button>
-        </div>
+        <TheSearch />
         <button class="ml-4 focus:outline-none">
             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd"></path></svg>
         </button>
@@ -46,12 +41,14 @@
 import TheDropdownApps from './TheDropdownApps.vue';
 import TheDropdownSettings from './TheDropdownSettings.vue';
 import LogoMain from './LogoMain.vue';
+import TheSearch from './TheSearch.vue';
 
 export default {
     components: {
         TheDropdownApps,
         TheDropdownSettings,
-        LogoMain
+        LogoMain,
+        TheSearch
     }
 }
 </script>
