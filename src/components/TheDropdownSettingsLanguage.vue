@@ -9,8 +9,8 @@
                 v-for="languageName, languageId in languages"
                 :key="languageId"
                 :label="languageName"
-                :active="languageId === selectedOptions.languageId"
-                @click="selectOption(languageId)"
+                :active="languageId === selectedOptions.language.id"
+                @click="selectOption({ id: languageId, text: languageName })"
             />
         </ul>
     </section>
@@ -32,7 +32,6 @@ export default {
 
     data() {
         return {
-            selectedLanguageId: 0,
             languages: [
                 'English',
                 'Ukrainian',
@@ -42,8 +41,8 @@ export default {
     },
 
     methods: {
-        selectOption(languageId) {
-            this.$emit('select-option', { name: 'languageId', value: languageId })
+        selectOption(language) {
+            this.$emit('select-option', { name: 'language', value: language })
         }
     },
 }
