@@ -11,24 +11,11 @@
             <LogoMain />
         </div>
         </div>
-        <TheSearchMobile 
-            v-if="isMobileSearchShown" 
+        <TheSearchWrapper
+            v-show="isSearchShown" 
+            :is-small-screen="isSmallScreen" 
             @close="closeMobileSearch" 
-        >
-            <TheSearch 
-                :search-query="searchQuery" 
-                @update-search-query="searchQuery = $event" 
-            />
-        </TheSearchMobile>
-
-       <TheSearchMain 
-            v-else 
-        >
-            <TheSearch 
-                :search-query="searchQuery" 
-                @update-search-query="searchQuery = $event" 
-            />
-        </TheSearchMain>
+        />
         <div 
             :class="[
                 'flex', 
@@ -65,32 +52,27 @@
 import TheDropdownApps from './TheDropdownApps.vue';
 import TheDropdownSettings from './TheDropdownSettings.vue';
 import LogoMain from './LogoMain.vue';
-import TheSearch from './TheSearch.vue';
-import TheSearchMain from './TheSearchMain.vue';
-import TheSearchMobile from './TheSearchMobile.vue';
 import ButtonLogin from './ButtonLogin.vue';
 import BaseIcon from './BaseIcon.vue';
 import BaseTooltip from './BaseTooltip.vue';
+import TheSearchWrapper from './TheSearchWrapper.vue';
 
 export default {
     components: {
-        TheDropdownApps,
-        TheDropdownSettings,
-        LogoMain,
-        TheSearch,
-        TheSearchMain,
-        TheSearchMobile,
-        ButtonLogin,
-        BaseIcon,
-        BaseTooltip
-    },
+    TheDropdownApps,
+    TheDropdownSettings,
+    LogoMain,
+    ButtonLogin,
+    BaseIcon,
+    BaseTooltip,
+    TheSearchWrapper
+},
     emits: {
         toggleSidebar: null
     },
 
     data() {
         return {
-            searchQuery: '',
             isSmallScreen: false,
             isMobileSearchActive: false,
             classes: ['flex', 'justify-between', 'w-full', 'bg-white', 'bg-opacity-95']
@@ -98,6 +80,10 @@ export default {
     },
 
     computed: {
+        isSearchShown() {
+            return this.isMobileSearchShown || !this.isSmallScreen
+        },
+
         isMobileSearchShown() {
             return this.isSmallScreen && this.isMobileSearchActive
         }
