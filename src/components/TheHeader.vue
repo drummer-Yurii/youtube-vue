@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { computed } from 'vue';
 import TheDropdownApps from './TheDropdownApps.vue';
 import TheDropdownSettings from './TheDropdownSettings.vue';
 import LogoMain from './LogoMain.vue';
@@ -67,6 +68,13 @@ export default {
     BaseTooltip,
     TheSearchWrapper
 },
+
+    provide () {
+        return {
+            isMobileSearchActive: computed(() => this.isMobileSearchActive)
+        }
+    },
+
     emits: {
         toggleSidebar: null
     },
