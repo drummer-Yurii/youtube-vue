@@ -86,7 +86,7 @@ export default {
         },
 
         leftSideClasses() {
-            return ['lg:w-1/4','flex',opacity]
+            return ['lg:w-1/4','flex', this.opacity]
         },
 
         rightSideClasses() {
@@ -98,7 +98,7 @@ export default {
                 'sm:space-x-3',
                 'p-2',
                 'sm:px-4',
-                opacity
+                this.opacity
             ]
         },
 
