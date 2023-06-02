@@ -6,7 +6,7 @@
                 v-show="isListening" 
                 :class="buttonAnimationClasses"
             />
-            <button :class="buttonClasses" @click="isListening = !isListening">
+            <button :class="buttonClasses" @click="toggleRecording">
                 <BaseIcon name="microphone" />
             </button>
         </div>
@@ -28,13 +28,23 @@ export default {
 
     data() {
         return {
-            isListening: false
+            isQuiet: false,
+            isListening: true,
+            isRecording: false,
+            recordingTimeout: null
         }
     },
     
     computed: {
         text() {
-            return this.isListening ? 'Listening...' : 'Microphone off. Try again.'
+            if (this.isQuiet) {
+                return "Didn't hear that. Try again."
+            }
+
+            if (this.isListening || this.isRecording) {
+                return 'Listening...'
+            }
+            return 'Microphone off. Try again.'
         },
 
         buttonClasses() {
@@ -65,14 +75,48 @@ export default {
 
         buttonAnimationClasses() {
             return [
+                this.isRecording ? 'bg-gray-300' : 'border border-gray-300',
                 'animate-ping', 
                 'absolute', 
                 'w-14', 
                 'h-14', 
-                'rounded-full', 
-                'border', 
-                'border-gray-300'
+                'rounded-full'
             ]
+        }
+    },
+
+    mounted () {
+        this.handleRecordingTimeout();
+    },
+
+    beforeUnmount() {
+        clearTimeout(this.recordingTimeout)
+    },
+
+    methods: {
+        toggleRecording() {
+            clearTimeout(this.recordingTimeout)
+            this.isQuiet = false
+            if (this.isRecording) {
+                this.isRecording = false
+                this.isListening = false
+            } else if (this.isListening) {
+                this.isRecording = true
+            } else {
+                this.isListening = true
+            }
+
+            this.handleRecordingTimeout()
+        },
+
+        handleRecordingTimeout() {
+            if (this.isListening || this.isRecording) {
+                this.recordingTimeout = setTimeout(() => {
+                    this.isQuiet = true
+                    this.isListening = false
+                    this.isRecording = false
+                }, 5000)
+            }
         }
     },
 }
