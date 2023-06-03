@@ -6,7 +6,7 @@
             class="flex items-center"
         >
             <BaseCheckbox
-                :id="index" 
+                :id="`search-prediction-${index}`" 
                 v-bind="$attrs"
                 :value="modelValue" 
                 @input="$emit('update:modelValue', $event.target.value)"
