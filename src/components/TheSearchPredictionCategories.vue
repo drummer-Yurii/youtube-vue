@@ -5,26 +5,26 @@
             :key="label"
             class="flex items-center"
         >
-            <input 
-                type="radio"
-                class="h-5 w-5 cursor-pointer" 
+           <BaseRadio 
                 :id="`search-prediction-category-${index}`" 
                 :value="label"
                 v-bind="$attrs"
-                @input="$emit('update:modelValue', $event.target.value)" 
-            />
-            <label 
-                :for="`search-prediction-category-${index}`" 
-                class="pl-4 cursor-pointer flex-grow"
-            > 
+                @input="$emit('update:modelValue', $event.target.value)"
+            >
                 {{ label }}
-            </label>
+            </BaseRadio>
         </div>
     </div>
 </template>
 
 <script>
+import BaseRadio from './BaseRadio.vue';
+
 export default {
+    components: {
+        BaseRadio 
+    },
+
     props: {
         categories: Array,
         modelValue: String
