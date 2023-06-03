@@ -2,10 +2,11 @@
     <div class="relative">
         <textarea 
             v-bind="$attrs"
-            @input="$emit('update:modelValue', $event.target.value)"
+            @input="(adjustHeight), $emit('update:modelValue', $event.target.value)"
             :maxlength="limit"
+            ref="textarea"
             placeholder="Provide additional details (optional)" 
-            class="border rounded-sm pt-2 pb-5 px-2 resize-none w-full focus:outline-none"
+            class="border rounded-sm pt-2 pb-8 px-2 resize-none w-full focus:outline-none overflow-hidden"
         />
         <BaseTextareaCounter>
             {{ counter }}
@@ -28,6 +29,17 @@ export default {
     computed: {
         counter() {
             return `${this.modelValue.length} / ${this.limit}`
+        }
+    },
+
+    mounted () {
+        this.adjustHeight();
+    },
+
+    methods: {
+        adjustHeight() {
+            this.$refs.textarea.style.height = 'auto'
+            this.$refs.textarea.style.height = `${this.$refs.textarea.scrollHeight}px`
         }
     },
 }
